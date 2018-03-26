@@ -1,0 +1,38 @@
+﻿<html>
+<head>
+    <meta content="text/html; charset=utf-8">
+    <title>AJAX AND JSON</title>
+    <script type="application/javascript">
+
+        function load()
+        {
+           var url = "data.json";
+           var request;
+
+           if(window.XMLHttpRequest){
+            request=new XMLHttpRequest();
+           }
+           else if(window.ActiveXObject){
+            request=new ActiveXObject("Microsoft.XMLHTTP");
+           }
+           request.onreadystatechange  = function(){
+              if (request.readyState == 4  )
+              {
+                var jsonObj = JSON.parse(request.responseText);
+                document.getElementById("Name").innerHTML =  jsonObj.Name;
+                document.getElementById("Address").innerHTML = jsonObj.Address;
+              }
+           }
+           request.open("GET", url, true);
+           request.send();
+        }
+    </script>
+</head>
+<body>
+
+    Name: <span id="Name"></span><br />
+    Address: <span id="Address"></span><br />
+
+    <button type="button" onclick="load()">Load Information</button>
+</body>
+</html>  
